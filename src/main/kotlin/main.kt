@@ -29,14 +29,14 @@ fun comission(transferAmount:Double, monthlyAmount:Double, paymentSystem:String,
         else -> 0.0
     }
     return comission
-    }
+}
 
 
 
 
 fun MastercardOrMaestroStock(transferAmount:Double,monthlyAmount: Double): Double {
 
-    if (monthlyAmount in 30000.0..7500000.0) {
+    if (monthlyAmount + transferAmount in 30000.0..7500000.0) {
         println("Комисиия не взимается")
         return 0.0
     } else {
@@ -49,7 +49,7 @@ fun MastercardOrMaestro(transferAmount: Double): Double {
 }
 
 fun visaAndMir(transferAmount: Double): Double {
-   return when {
+    return when {
         (transferAmount * 0.0075 > 3500) -> transferAmount * 0.0075
         else -> 3500.0
     }
@@ -63,8 +63,8 @@ fun transfer(transferAmount:Double, monthlyAmount:Double, paymentSystem:String, 
         } else {
             transferAmount - comission(transferAmount, monthlyAmount, paymentSystem, stock)
         }
-        else -> if((transferAmount + amountPerDay> 1500000) || (transferAmount + monthlyAmount > 6000000)){
-            println("Ошибка: Максимальная сумма перевода в сутки 15000 руб. За месяц 60000 руб.")
+        else -> if((transferAmount + amountPerDay> 15000000) || (transferAmount + monthlyAmount > 60000000)){
+            println("Ошибка: Максимальная сумма перевода в сутки 150000 руб. За месяц 600000 руб.")
             0.0
         } else { transferAmount - comission(transferAmount, monthlyAmount, paymentSystem, stock)
         }
